@@ -1,24 +1,38 @@
 package com.ideproject.mooracle.solitaireandroid
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import android.support.v7.app.AppCompatActivity
+import org.jetbrains.anko.button
+import org.jetbrains.anko.onClick
+import org.jetbrains.anko.relativeLayout
+import org.jetbrains.anko.textView
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         //set the counter variable which will be incremented and printed in textView later
         var counter = 0
-
-        //set the on click listener on the counter button
-        counterButton.setOnClickListener {
-            //when the button is clicked then the counter will be incremented
-            counter++
-            //then print the counter (in string) to counter text view
-            counterTextView.text = counter.toString()
+        //setting relative layout using anko
+        relativeLayout {
+            //here let set the textView that will hold the counter variable
+            //the id of this textView will be counterTextView
+            val counterTextView = textView {
+                //here we initiate the condition of the text View
+                text = "0"
+                //also set the properties of the text as in text size
+                textSize = 24f //f here denotes the number 24 is not an integer but a float
+            }
+            button {
+                //set onClick listner
+                onClick {
+                    // when clicked increment the counter by 1
+                    counter++
+                    //set the counter text view to display the latest counter value
+                    counterTextView.text = counter.toString()
+                }
+            }
         }
     }
 }
